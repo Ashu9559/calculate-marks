@@ -3,138 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculator</title>
+    <title>Marks Calculator</title>
     <style>
         .container{
+    width: 400px;
     height: 500px;
-    width: 300px;
-    background-color: black;
-    border: 2px solid black;
+    border: 10px solid rgb(43, 30, 43);
+    border-radius: 20px;
+    background-color: darkslategrey;
+}
+
+.input{
+    margin-top: 25px;
+    margin-left: 25%;
+    width: 200px;
+    height: 30px;
     border-radius: 10px;
-    
-}
-.inside-row{
-    margin-top: 10%;
-}
-.row{
+    border: white;
+    background-color: black;
+    color: white;
+    font-size: 20px;
     text-align: center;
-    margin-top: 10px;
-    margin-inline: 5px;
+}
+button{
+    margin-top: 20px;
+    width: 150px;
+    height: 50px;
+    border-radius: 20px;
+    background-color: #035b5b;
+    font-size: 30px;
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
 }
 .btn{
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
-    font-size: larger;
-    font-weight: bold;
-    background-color: grey;
-    color: white;
-}
-#zero{
-    width: 105px;
-    border-radius: 5px;
-}
-#cancel{
-    width: 105px;
-    border-radius: 5px;
-}
-#box{
-    width: 250px;
-    height: 50px;
-    background-color: white;
-    margin-top: 50px;
-    margin-left: 24px;
-    border-radius: 5px;
-    color: black;
-    font-size: 40px;
-}
-.calc{
-    font-family: 'Times New Roman', Times, serif;
-    color: whitesmoke;
     text-align: center;
-    font-weight: bold;
 }
-#last{
-    background-color: rgb(102, 135, 4)
+.para{
+    font-size: 50px;
+    font-weight: bold;
+    color: #032e2e;
+    font-family: cursive;
+}
+.perc{
+    font-size: 80px;
+    font-weight: bolder;
+    color: #032e2e;
+    font-family: cursive;
+
 }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1 class="calc">CALCULATOR</h1>
-        <div id="box" max = "15">0</div>
-        <div class="inside-row">
-            <div class="row">
-                <button class="btn" onclick="clearDisplay('')">AC</button>
-                <button class="btn" onclick="clearLastDigit('')">X</button>
-                <button class="btn" onclick="appendToDisplay('%')">%</button>
-                <button class="btn" onclick="appendToDisplay('/')" id="last">/</button>
-            </div>
-            <div class="row">
-                <button class="btn" onclick="appendToDisplay('7')">7</button>
-                <button class="btn" onclick="appendToDisplay('8')">8</button>
-                <button class="btn" onclick="appendToDisplay('9')">9</button>
-                <button class="btn"  onclick="appendToDisplay('*')"id="last">*</button>
-            </div>
-            <div class="row">
-                <button class="btn" onclick="appendToDisplay('4')">4</button>
-                <button class="btn" onclick="appendToDisplay('5')">5</button>
-                <button class="btn" onclick="appendToDisplay('6')">6</button>
-                <button class="btn" onclick="appendToDisplay('-')" id="last">-</button>
-            </div>
-            <div class="row">
-                <button class="btn" onclick="appendToDisplay('1')">1</button>
-                <button class="btn" onclick="appendToDisplay('2')">2</button>
-                <button class="btn" onclick="appendToDisplay('3')">3</button>
-                <button class="btn" onclick="appendToDisplay('+')" id="last">+</button>
-            </div>
-            <div class="row">
-                <button class="btn" onclick="appendToDisplay('0')"  id="zero">0</button>
-                <button class="btn" onclick="appendToDisplay('.')">.</button>
-                <button class="btn" onclick="calculateResult('')" id="last">=</button>
-            </div>
-        </div>
         
+        <div class="inside">
+        <div class="for-input"><input type="number" class="input" id="num1" placeholder="Hindi" value="hindi" min="0" max="100" required></div>
+
+       <div class="for-input"><input type="number" class="input" id="num2" placeholder="English" value="english" min="0" max="100" required></div>
+       <div class="for-input"><input type="number" class="input" id="num3" placeholder="Physics" value="physics" min="0" max="100" required></div>
+       <div class="for-input"><input type="number" class="input" id="num4" placeholder="Chemistry" value="chemistry" min="0" max="100" required></div>
+       <div class="for-input"><input type="number" class="input" id="num5" placeholder="Maths / Biology" value="maths | biology" min="0" max="100" required> </div>
+       <div class="btn"><button type="submit" onclick="
+       calculate()">Calculate</button></div>
+        
+        </div> 
+        <div id="result" style="color: white; font-size: 20px; margin-top: 15px; text-align: center; font-weight: bold;">
+
+        </div>
     </div>
+    <div class="para">
+        Calculate your
+    </div>
+    <div class="perc">
+        Percentage
+    </div>
+   
     <script>
-        let display = document.getElementById('box');
-        let currentInput = '0';
-        const maxDigits = 10;
-    
-        function appendToDisplay(value) {
-          if (currentInput.length < maxDigits) {
-            if (currentInput === '0' && (value === '.' || !isNaN(value))) {
-              currentInput = value;
-            } else {
-              currentInput += value;
-            }
-          }
-          box.textContent = currentInput;
-        }
-    
-        function clearLastDigit() {
-          currentInput = currentInput.slice(0, -1);
-          box.textContent = currentInput || '0';
-        }
-    
-        function clearEntry() {
-          currentInput = '0';
-          box.textContent = currentInput;
-        }
-    
-        function clearDisplay() {
-          currentInput = '0';
-          box.textContent = currentInput;
-        }
-    
-        function calculateResult() {
-          try {
-            currentInput = eval(currentInput).toString();
-            box.textContent = currentInput;
-          } catch (error) {
-            box.textContent = 'Error';
-          }
-        }
-      </script>
+        function calculate(){
+  let num1 = parseFloat(document.getElementById('num1').value);
+  let num2 = parseFloat(document.getElementById('num2').value);
+  let num3 = parseFloat(document.getElementById('num3').value);
+  let num4 = parseFloat(document.getElementById('num4').value);
+  let num5 = parseFloat(document.getElementById('num5').value);
+  let sum = num1 + num2 + num3 + num4 + num5;
+  let maxMarks = 500;
+  let percentage = parseFloat((sum / 500) * 100);
+  if(percentage >= 40){
+    document.getElementById('result').innerHTML = `You have got ${sum} marks out of ${maxMarks} and <br> percentage is ${percentage}% <br> RESULT:  Pass`;
+  }
+ else {
+  document.getElementById('result').innerHTML = `You have got ${sum} marks out of ${maxMarks} and <br> percentage is ${percentage}% <br> RESULT:  Fail`;
+ }
+}
+    </script>
 </body>
 </html>
